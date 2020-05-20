@@ -97,6 +97,11 @@ void riscvDRET(riscvP riscv);
 void riscvSetDM(riscvP riscv, Bool DM);
 
 //
+// Update debug mode stall indication
+//
+void riscvSetDMStall(riscvP riscv, Bool DMStall);
+
+//
 // Set step breakpoint if required
 //
 void riscvSetStepBreakpoint(riscvP riscv);
@@ -143,6 +148,36 @@ void riscvNewNetPorts(riscvP riscv);
 void riscvFreeNetPorts(riscvP riscv);
 
 //
+// Allocate timers
+//
+void riscvNewTimers(riscvP riscv);
+
+//
+// Free timers
+//
+void riscvFreeTimers(riscvP riscv);
+
+//
+// Acknowledge CLIC-sourced interrupt
+//
+void riscvAcknowledgeCLICInt(riscvP hart, Uns32 intIndex);
+
+//
+// Create CLIC memory-mapped block and data structures
+//
+void riscvMapCLICDomain(riscvP root, memDomainP CLICDomain);
+
+//
+// Allocate CLIC data structures
+//
+void riscvNewCLIC(riscvP riscv, Uns32 index);
+
+//
+// Free CLIC data structures
+//
+void riscvFreeCLIC(riscvP riscv);
+
+//
 // Save net state not covered by register read/write API
 //
 void riscvNetSave(
@@ -159,3 +194,22 @@ void riscvNetRestore(
     vmiRestoreContextP  cxt,
     vmiSaveRestorePhase phase
 );
+
+//
+// Save timer state not covered by register read/write API
+//
+void riscvTimerSave(
+    riscvP              riscv,
+    vmiSaveContextP     cxt,
+    vmiSaveRestorePhase phase
+);
+
+//
+// Restore timer state not covered by register read/write API
+//
+void riscvTimerRestore(
+    riscvP              riscv,
+    vmiRestoreContextP  cxt,
+    vmiSaveRestorePhase phase
+);
+
